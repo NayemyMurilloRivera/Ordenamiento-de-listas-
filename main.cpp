@@ -44,17 +44,19 @@ void merge2(int* inicio, int* medio, int* final) {
     }
 
     cout << "Arreglo resultante:" << endl;
-    for (int* A = inicio; A <= final; A++) {
-        cout << "[" << *A << "] ";
+    for (int* B = inicio; B <= final; B++) {
+        cout << "[" << *B << "] ";
     }
 }
 
 int main() {
-    int lista[10] = { 2,6,8 ,10, 20, 1, 3,7, 11,15 };
+    //int lista[10] = { 2,6,8 ,10, 20, 1, 3,7, 11,15 };
+    int lista[10] = { 2,678,10, 20, 303,7, 11,15 , 17, 21 };
     int* ptr_inicio = lista;
     int* ptr_medio = lista + 5;
     int* ptr_final = lista + 9;
-    merge1(ptr_inicio, ptr_medio, ptr_final);
+    //merge1(ptr_inicio, ptr_medio, ptr_final);
+    merge2(ptr_inicio, ptr_medio, ptr_final);
 
     return 0;
 }
