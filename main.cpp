@@ -26,6 +26,29 @@ void merge1(int* inicio, int* medio, int* final) {
     }
 }
 
+void merge2(int* inicio, int* medio, int* final) {
+    int* ptr_inicio = inicio;
+    int* ptr_medio = medio;
+    int* ptr_final = final;
+
+
+    while (ptr_medio <= ptr_final) {
+        int* p = ptr_inicio;  
+        while (p < ptr_medio){
+            if (*p > *ptr_medio) {
+                swap(*p, *ptr_medio);
+            }
+            p++;  
+        }
+        ptr_medio++;
+    }
+
+    cout << "Arreglo resultante:" << endl;
+    for (int* A = inicio; A <= final; A++) {
+        cout << "[" << *A << "] ";
+    }
+}
+
 int main() {
     int lista[10] = { 2,6,8 ,10, 20, 1, 3,7, 11,15 };
     int* ptr_inicio = lista;
