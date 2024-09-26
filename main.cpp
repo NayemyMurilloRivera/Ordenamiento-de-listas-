@@ -1,62 +1,48 @@
 #include <iostream>
 using namespace std;
 
-void merge1(int* inicio, int* medio, int* final) {
-    int* ptr_inicio = inicio;
-    int* ptr_medio = medio;
-    int* ptr_final = final;
-
-    while (ptr_medio < ptr_final +1) {
-        for (int* p = ptr_inicio; p < ptr_final; p++) {
-            while (*p > *ptr_medio) {
-                swap(*p, *ptr_medio);
-                break;
-                if (*p == *ptr_medio) {
-                    ptr_medio++;
-                    break;
-                }
-            }
-        }
-
-        ptr_medio++;
-    }
-    cout << "Arreglo resultante:" << endl;
-    for (int* A = ptr_inicio ; A < ptr_final+1 ; A++) {
-        cout << "[" << *A << "] ";
-    }
+int obtener_longitud_array(int* inicio, int* medio) {
+    return (medio - inicio) * 2;
 }
 
-void merge2(int* inicio, int* medio, int* final) {
+void merge(int* inicio, int* medio) {
     int* ptr_inicio = inicio;
     int* ptr_medio = medio;
-    int* ptr_final = final;
+    int longi = obtener_longitud_array(ptr_inicio, ptr_medio);
+    int* ptr_final = inicio + longi;  
 
-
-    while (ptr_medio <= ptr_final) {
-        int* p = ptr_inicio;  
-        while (p < ptr_medio){
+    while (ptr_medio < ptr_final) {
+        int* p = ptr_inicio;
+        while (p < ptr_medio) {
             if (*p > *ptr_medio) {
                 swap(*p, *ptr_medio);
             }
-            p++;  
+            p++;
         }
         ptr_medio++;
-    }
-
-    cout << "Arreglo resultante:" << endl;
-    for (int* B = inicio; B <= final; B++) {
-        cout << "[" << *B << "] ";
     }
 }
 
 int main() {
-    //int lista[10] = { 2,6,8 ,10, 20, 1, 3,7, 11,15 };
-    int lista[10] = { 2,678,10, 20, 303,7, 11,15 , 17, 21 };
+    int lista[10] = {2, 1155, 10, 20, 303, 7, 11, 15, 17, 21};
     int* ptr_inicio = lista;
     int* ptr_medio = lista + 5;
-    int* ptr_final = lista + 9;
-    //merge1(ptr_inicio, ptr_medio, ptr_final);
-    merge2(ptr_inicio, ptr_medio, ptr_final);
+    int longi = obtener_longitud_array(ptr_inicio, ptr_medio);  
+    int* ptr_final = ptr_inicio + longi; 
+
+    cout << "Arreglo inicial:" << endl;
+    for (int* B = ptr_inicio; B < ptr_final; B++) {  
+        cout << "[" << *B << "] ";
+    }
+    cout << endl;
+
+    merge(ptr_inicio, ptr_medio); 
+
+    cout << "Arreglo resultante:" << endl;
+    for (int* B = ptr_inicio; B < ptr_final; B++) {  
+        cout << "[" << *B << "] ";
+    }
 
     return 0;
 }
+
