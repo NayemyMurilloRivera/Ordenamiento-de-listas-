@@ -5,12 +5,6 @@ void cok(int* inicio, int* fin) {
     int* ptr_inicio;
     int* ptr_final;
     bool sigue = true; 
-
-    cout << "Array inicial:" << endl;
-    for (int* B = inicio; B <= fin; B++) {
-        cout << "[" << *B << "] ";
-    }
-    cout << endl;
     while (sigue) {
         sigue = false;  
         ptr_inicio = inicio;
@@ -26,17 +20,11 @@ void cok(int* inicio, int* fin) {
             
             if (*ptr_final < *(ptr_final - 1)) {
                 swap(*ptr_final, *(ptr_final - 1));
-                sigue = true;  // Hubo un intercambio, por lo que continuamos
+                sigue = true; 
             }
             ptr_final--;
         }
     }
-
-    cout << "Arreglo tras split:" << endl;
-    for (int* B = inicio; B <= fin; B++) {
-        cout << "[" << *B << "] ";
-    }
-    cout << endl;
 }
 
 int main() {
@@ -44,7 +32,19 @@ int main() {
     int* ptr_inicio = lista;
     int* ptr_final = lista + 8;
 
+    cout << "Arreglo inicial:" << endl;
+    for (int* B = inicio; B <= fin; B++) {
+        cout << "[" << *B << "] ";
+    }
+    cout << endl;
+
     cok(ptr_inicio, ptr_final);
+
+    cout << "Arreglo tras split:" << endl;
+    for (int* B = inicio; B <= fin; B++) {
+        cout << "[" << *B << "] ";
+    }
+    cout << endl;
 
     return 0;
 }
