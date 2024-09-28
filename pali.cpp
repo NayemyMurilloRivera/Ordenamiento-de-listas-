@@ -1,48 +1,52 @@
-include <iostream> 
-using namespace std; 
+#include <cstring>
+#include <iostream>
+using namespace std;
 
-bool palindromo(char * p){
-   int contador=0;
-   bool sigue = true;
-   char *i=p+0;
-   while (true){
-       if (*i !='\0') {
-          contador ++;
-       }
-   }    
-   
-   char * f= p+ contador;
-   while ((i<f) && sigue){
-       if (i == f) {
-           sigue = true;
-           return true;
-       
-       }
-       else{    
-           break;
-           return false;
-       }
-       
-   
-   }
-   
-   
+void mayus(char *p, int total) {
+  for (int i = 0; i < total; i++) {
+    if (*(p + i) >= 'a' && *(p + i) <= 'z') {
+      *(p + i) = *(p + i) - 32;
+    }
+  }
 }
 
- 
- int main() {
-    char * frase ;
-    cout << "Ingrese una frase"; cin >> frase;
-    bool quees= palindromo(frase);
-    if (quees==true){
-        cout <<"Es un palindromo";
-    
-    }
-    else{
-        cout << "pipipi";
-    
-    
+bool palindromo(char *p, int total) {
+  char *i = p;
+  char *f = p + total - 1;
+
+  for (char *r = i; r < f; r++, f--) {
+    if (*r == ' ') {
+      r++;
     }
 
-    return 0;
+    if (*f == ' ') {
+      f--;
+    }
+
+    if (*r != *f) {
+      return false; 
+    }
+  }
+  return true; 
 }
+
+int main() {
+  char frase[100];
+  cout << "Ingrese una frase: ";
+  cin.getline(frase, 100);
+  char *p = frase;
+  int total = strlen(frase);
+  mayus(p, total);
+    
+  bool quees = palindromo(frase, total);
+  if (quees == true) {
+    cout << "Es un palíndromo" << endl;
+  } else {
+    cout << "No es un palíndromo" << endl;
+  }
+
+  return 0;
+}
+
+// ejemplo A luna ese anula
+//Aji traga la lagartija
