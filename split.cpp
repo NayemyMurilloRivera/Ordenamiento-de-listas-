@@ -1,48 +1,41 @@
 #include <iostream>
 using namespace std;
 
-
-void split1(int* inicio, int* final) {
-    int* f = final - 1;
+/*Esta función recorre el elemento *inicio hasta *(final - 1)*/
+void arreglar(int* inicio, int* final) {
+    int *f = final - 1;
     while (inicio < f) {
-        for (int* i = inicio; i < f; f--) {
-            swap(*i, *f);
-        }
+        swap(*inicio, *f);
+        f--;
     }
-    int* impar = final - 1;
-    int* p = inicio;
+}
 
-    while (p < impar) {
-        if (*p % 2 != 0) {
-            swap(*p, *impar);
-            impar--;
+/*Función split*/
+void split(int* inicio, int* final) {
+    while (inicio < final-2) { /*Esta condicional solo funciona para este array tienes que encontrar una condicional general*/
+        if (*inicio % 2 != 0) { /*Si *inicio es impar, entonces lo intercambia con *final y luego llama a la función arreglar*/
+            swap(*inicio, *final);
+            arreglar(inicio, final); /*Llamada a la función arreglar*/
         }
-        else {
-            p++;
-            
-        }
+        inicio++; /*Hace que inicio apunte al siguiente elemento del array*/
     }
-
-    final = f;
-
-    
-
 }
 
 int main() {
-    int lista[8] = { 1, 2, 3, 4, 5, 6 , 7 , 8};
+    int lista[8] = { 1, 2, 3, 4, 5, 6 , 8 ,  };
     int* ptr_inicio = lista;
-    int* ptr_final = lista + 8;
+    int* ptr_final = lista + 8; /*Corrección realizada para que el puntero no se salga del array*/
 
-    cout << "Arreglo inicial:" << endl;
-    for (int* B = ptr_inicio; B < ptr_final; B++) {
+    cout << "Arreglo inicial:" << endl; 
+    for (int* B = ptr_inicio; B <= ptr_final; B++) { /*Imprime el arreglo (recomiendo declararlo como función)*/
         cout << "[" << *B << "] ";
     }
     cout << endl;
 
-    split1(ptr_inicio, ptr_final);
+    split(ptr_inicio, ptr_final); /*Llamada a función split*/
+
     cout << "Arreglo final:" << endl;
-    for (int* B = ptr_inicio; B < ptr_final; B++) {
+    for (int* B = ptr_inicio; B <= ptr_final; B++) { /*Imprime el arreglo modificado (recomiendo declararlo como función)*/
         cout << "[" << *B << "] ";
     }
     cout << endl;
