@@ -36,20 +36,24 @@ void merge(nodo*& A, nodo*& B) {
 
     for (nodo* p = inicio; i != nullptr || j != nullptr; p = p->next) {
         if (i != nullptr && (j == nullptr || i->valor < j->valor)) {
-            p->next = i;   
+            p->next = i;
             i = i->next;
+
         }
         else if (j != nullptr) {
-            p->next = j;  
+            p->next = j;
             j = j->next;
         }
-       
-        if ((i != nullptr || j != nullptr) || p->next != nullptr) {
-            cout << "->";
-        } cout << p->valor;
-        
     }
-    
+
+    if (inicio == i) {
+        A = inicio;
+        B = nullptr;
+    }
+    else {
+        A = 
+        B = inicio;
+    }
     cout << endl;
 }
 
@@ -72,20 +76,22 @@ void impresion_nodo(nodo*& nodo1) {
 int main() {
     nodo* nodo1 = nullptr;
     nodo* nodo2 = nullptr;
-    int B[10] = { 1, 3, 7, 9, 11, 13, 15, 17, 19, 21 };
-    int A[5] = { 2, 4, 6, 8, 10 };
+    int A[6] = { 13,17,20,25,30,38 };
+    int B[9] = {1,8,13,20,23,31,38,40,53};
 
     creacion_nodo(A, A + 5, nodo1);
-    creacion_nodo(B, B + 9, nodo2);
+    creacion_nodo(B, B + 8, nodo2);
 
- 
-    cout << "Lista A: "<<endl;
+
+    cout << "Lista A: " << endl;
     impresion_nodo(nodo1);
-    cout << "Lista B: "<<endl;
+    cout << "Lista B: " << endl;
     impresion_nodo(nodo2);
-    cout<<"Merge:"<<endl;
+    cout << "Merge:";
     merge(nodo1, nodo2);
-    
+    //impresion_nodo(nodo1);
+    impresion_nodo(nodo2);
+
 
     return 0;
 }
