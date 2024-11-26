@@ -1,0 +1,74 @@
+#include <iostream>
+using namespace std;
+
+template <typename T>
+struct Asc {
+    bool operator()(const T& a, const T& b) const {
+        return a < b; 
+    }
+};
+
+template <typename T>
+struct Desc {
+    bool operator()(const T& a, const T& b) const {
+        return a > b; 
+    }
+};
+
+template <typename T>
+void mSwap(T& a, T& b) {
+    T temp = a;
+    a = b;
+    b = temp;
+}
+
+template <typename T, typename Compare = Asc<T>>
+class Pivot {
+    T pivote;      // Valor del pivote
+    Compare comp;  // Comparador (Ascendente o Descendente)
+
+public:
+    // Constructor -> inicializa el pivote
+    explicit Pivot(const T& pivote) : pivote(pivote), comp() {}
+
+    // Sobrecarga del operador () -> particiona el array
+    void operator()(T* start, T* end) {
+        T* left = start;  // Inicio del array
+        T* right = end;   // Final del array
+
+        while (left <= right) {
+            // Mueve el puntero izquierdo -> encuentra un elemento fuera de lugar
+            while (comp(*left, pivote)) left++;
+            // Mueve el puntero derecho -> encuentra un elemento fuera de lugar
+            while (comp(pivote, *right)) right--;
+
+            // Intercambia elementos si están en la posición equivocada
+            if (left <= right) {
+                mSwap(*left, *right);
+                left++;
+                right--;
+            }
+        }
+    }
+};
+
+int main() {
+    int arr[] = {1, 13, 20, 15, 3, 5, 30, 8};
+    size_t n = sizeof(arr) / sizeof(arr[0]);
+
+    Pivot<int, Asc<int>> pivotAsc(5);
+    pivotAsc(arr, arr + n - 1); // Parte el array
+
+    std::cout << "Array particionado (Ascendente): ";
+    for (int x : arr) std::cout << x << " ";
+    std::cout << std::endl;
+
+    Pivot<int, Desc<int>> pivotDesc(5);
+    pivotDesc(arr, arr + n - 1); // Parte el array
+
+    std::cout << "Array particionado (Descendente): ";
+    for (int x : arr) std::cout << x << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
